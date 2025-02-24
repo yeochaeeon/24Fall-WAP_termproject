@@ -1,6 +1,6 @@
-# 스터디 그룹 개설 및 관리 웹서비스
-- 이 프로젝트는 Node.js 와 Express, REST API 를 활용한 서버입니다.
-## 주요 기능
+# 📝STUDY-MANAGER
+- 이 프로젝트는 스터디 개설 및 관리 서비스를 제공하는 Node.js 와 Express, REST API 를 활용한 서버입니다.
+## 🔧주요 기능
 1. 사용자 인증 (로그인 / 회원 가입)
    - passport, bcrypt 모듈 활용하여 인증 및 보안
 2. 메인페이지 - 개설된 스터디 목록 열람
@@ -23,25 +23,38 @@
 
 ## 📂 프로젝트 구조
 ```
-📁 study-hub
-├── 📂 controllers
-│   ├── page.js  # 메인 페이지 및 스터디 관련 컨트롤러
-│   ├── study.js  # 스터디 관리 컨트롤러
-│   ├── auth.js  # 인증 관련 컨트롤러
-├── 📂 routes
-│   ├── page.js  # 메인 페이지 라우팅
-│   ├── study.js  # 스터디 관련 라우팅
-│   ├── auth.js  # 인증 관련 라우팅
-├── 📂 views
-│   ├── index.html  # 메인 페이지
-│   ├── profile.html  # 내 스터디 정보 페이지
-│   ├── study.html  # 개별 스터디 페이지
-├── 📂 public
-│   ├── study.css  # 프론트엔드 스타일링
-│   ├── study.js  # 프론트엔드 기능 구현
-├── app.js  # 서버 실행 및 미들웨어 설정
-├── passport  # Passport.js 설정 파일
-├── package.json  # 프로젝트 종속성 관리
+📁 study-manager
+    ├── 📁 config/
+    │   └── config.json           # 애플리케이션 설정 파일
+    ├── 📂 controllers
+    │   ├── page.js               # 메인 페이지 및 스터디 관련 컨트롤러
+    │   ├── study.js              # 스터디 관리 컨트롤러
+    │   └── auth.js               # 인증 관련 컨트롤러
+    ├── 📁 middlewares/
+    │   └── index.js              # 미들웨어 로직
+    ├── 📁 models/
+    │   └── index.js              # MySQL 데이터베이스 풀 설정
+    ├── 📁 passport/
+    │   ├── index.js              # Passport 설정
+    │   └── localStrategy.js      # 로컬 인증 전략
+    ├── 📂 routes
+    │   ├── page.js               # 메인 페이지 라우팅
+    │   ├── study.js              # 스터디 관리 페이지 내부 라우팅
+    │   └── auth.js               # 인증 관련 라우팅
+    ├── 📂 views
+    │   ├── error.html            # 오류 페이지 템플릿
+    │   ├── join.html             # 회원가입 페이지 템플릿
+    │   ├── layout.html           # 레이아웃 템플릿
+    │   ├── main.html             # 메인 페이지 템플릿
+    │   └── profile.html          # 프로필 페이지 템플릿
+    ├── 📂 public
+    │   ├── main.css              # 메인 스타일시트
+    │   ├── study.css             # 스터디관리 페이지 스타일시트
+    │   └── study.html            # 정적 HTML 파일
+    ├── .env                       # 환경 변수 설정
+    ├── app.js                     # 메인 애플리케이션 파일
+    ├── package.json               # 프로젝트 종속성
+    └── package-lock.json          # 종속성 잠금 파일
 ```
 
 ## 🚀실행 방법
@@ -52,5 +65,8 @@
    npm install
    ```
 2. 환경변수 설정
+   - `.env`파일 생성 후 설
 3. 서버 실행
-  ``` npm start```
+   ```
+   npm start
+   ```
