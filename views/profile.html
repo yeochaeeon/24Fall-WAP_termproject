@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 style="text-align: center">내 프로필</h1>
+<div class="timeline">
+  <div class="followings half" style="width: 90%">
+    <h3>내가 개설한 스터디</h3>
+    {% if createdStudies.length > 0 %}
+    {% for study in createdStudies %}
+    <div class="study">
+      <div class="study-title"><strong>{{ study.title }}</strong></div>
+      <div class="study-date">개설일: {{ study.createdAt }}</div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>개설한 스터디가 없습니다.</p>
+    {% endif %}
+  </div>
+  <div class="followers half" style="width: 90%">
+    <h3>내가 가입한 스터디</h3>
+    {% if joinedStudies.length > 0 %}
+    {% for study in joinedStudies %}
+    <div class="study">
+      <div class="study-title"><strong>{{ study.title }}</strong></div>
+      <div class="study-author">스터디장: {{ study.createdBy }}</div>
+      <div class="study-date">가입일: {{ study.joinDate }}</div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>가입한 스터디가 없습니다.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,161 @@
+/* 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #444;
+}
+
+.study-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tasks, .notices {
+    margin-top: 30px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 과제 등록 */
+form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+form h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+form input[type="text"],
+form input[type="date"],
+form textarea {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* 공지사항 */
+.notices h2, .tasks h2 {
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.notices ul, .tasks ul {
+    padding: 0;
+}
+
+.notices li, .tasks li {
+    margin-bottom: 10px;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    .study-page {
+        padding: 15px;
+    }
+
+    form input[type="text"],
+    form input[type="date"],
+    form textarea {
+        width: 100%;
+    }
+}
+.study-title{
+    border: dotted 0.5px #6a93fd;
+    border-radius: 4px;
+    background: #e8f7ff;
+    padding:1px;
+}
+.task{
+    display: flex;
+    justify-content: space-between;
+}
+.notice{
+    display: flex;
+    justify-content: space-between;
+}
+.detailForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+
+}
+
+.detailForm button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.detailForm button:hover {
+    background-color: #0056b3;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#task-dueDate{
+    margin-top:5px;
+}

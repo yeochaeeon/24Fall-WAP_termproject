@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="profile-wrap">
+        <div class="profile">
+          {% if user %}
+          <div class="profile2">
+            <div class="profile-header">
+              <div class="user-name">{{'✍️공부합시다! ' + user.nick + '님'}}</div>
+              <div class="smallbtns">
+                <a id="lastVisited" href="/lastVisited" class="btn">최근 방문 스터디</a>
+                <a id="my-profile" href="/profile" class="btn">내 프로필</a>
+                <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+              </div>
+            </div>
+            <div class="numOfStudy">
+              <div class="half">
+                <div style="font-weight: bold">개설한 스터디</div>
+                <div class="count created-count">{{user.createdCount}}개</div>
+              </div>
+              <div class="half">
+                <div style="font-weight: bold">가입한 스터디</div>
+                <div class="count joined-count">{{user.joinedCount}}개</div>
+              </div>
+            </div>
+            <input id="my-id" type="hidden" value="{{user.id}}">
+          </div>
+          <div class="register">
+            <h2 style="text-align: center">📖 스터디 개설 📖</h2>
+            <form id="study-form" action="/register" method="post">
+              <div class="input-group">
+                <label for="title" style="font-weight: bold">스터디 제목</label>
+                <input id="title" name="title" type="text" maxlength="100" placeholder="스터디 제목을 입력하세요" required>
+              </div>
+              <div class="input-group">
+                <label for="maxMembers" style="font-weight: bold">최대 인원</label>
+                <input id="maxMembers" name="maxMembers" type="number" min="1" placeholder="최대 인원 (숫자)" required>
+              </div>
+              <div class="form-actions">
+                <button id="study-btn" type="submit" class="btn">개설하기</button>
+              </div>
+            </form>
+          </div>
+        {% else %}
+          <h2 style="text-align: center">로그인</h2>
+          <form id="login-form" action="/auth/login" method="post">
+            <div class="input-group">
+              <label for="id" style="font-weight: bold">아이디</label>
+              <input id="id" type="id" name="id" required autofocus>
+            </div>
+            <div class="input-group">
+              <label for="password" style="font-weight: bold">비밀번호</label>
+              <input id="password" type="password" name="password" required>
+            </div>
+            <div class="loginBtns">
+              <button id="login" type="submit" class="btn">로그인</button>
+              <a id="join" href="/join" class="btn">회원가입</a>
+            </div>
+          </form>
+        {% endif %}
+        </div>
+        {% block content %}
+        {% endblock %}
+        <footer>
+          Edited by Chae-eon Yeo
+        </footer>
+      </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      window.onload = () => {
+        if (new URL(location.href).searchParams.get('error')) {
+          alert(new URL(location.href).searchParams.get('error'));
+        }
+      };
+    </script>
+    {% block script %} {% endblock %}
+  </body>
+</html>

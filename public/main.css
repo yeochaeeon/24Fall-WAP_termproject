@@ -1,0 +1,238 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  max-width: 750px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+}
+.btn {
+  margin:3px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 7px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid silver;
+  color: #6a93fd;
+  height: 37px;
+  line-height: 37px;
+  vertical-align: top;
+  font-size: 12px;
+}
+input[type='text'], input[type='email'], input[type='password'], textarea {
+  border-radius: 4px;
+  height: 37px;
+  padding: 10px;
+  border: 1px solid silver;
+}
+.numOfStudy{
+  display: flex;
+  justify-content: center;
+}
+.profile-header {
+  display: flex; /* 수평 정렬 */
+  align-items: center; /* 가운데 정렬 */
+  justify-content: space-between; /* 요소 간 간격 조정 (필요 시 삭제) */
+  gap: 10px; /* 닉네임과 버튼 간 간격 */
+  margin-bottom: 15px; /* 아래쪽 여백 */
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가운데 정렬 */
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.smallbtns{
+  display: flex; /* 버튼을 수평으로 배치 */
+  gap: 5px; /* 버튼 간 간격 */
+}
+
+.input-group {
+  display: flex;
+  align-items: center; /* 레이블과 입력 필드 정렬 */
+  margin-bottom: 15px;
+}
+.input-group label { width: 25%; display: inline-block; text-align: center}
+.input-group input { width: 70%; }
+.half { float: left; width: 50%; margin: 10px 0; }
+#join { float: right; }
+.profile-wrap {
+  width: 100%;
+  /*display: flex;*/
+  flex-wrap:wrap;
+  justify-content: space-between;
+  vertical-align: top;
+  margin: 10px 0;
+}
+/* Clearfix 추가 */
+.profile-wrap::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.profile {
+  text-align: left;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 4px;
+  border: 1px solid #f1f1f1;
+  background: #f7ffff;
+}
+.user-name { font-weight: bold; font-size: 18px; margin-right: 10px; /* 버튼과 간격 */}
+.count { font-weight: bold; color: #6a93fd; font-size: 18px; }
+.timeline {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  /*display: inline-block;*/
+  border-radius: 4px;
+  vertical-align: top;
+}
+#id{
+  padding: 7px;
+}
+.loginBtns{
+  margin:5px;
+  display: flex;
+  justify-content: right;
+}
+#twit-form {
+  border-bottom: 1px solid silver;
+  padding: 10px;
+  background: lightcyan;
+  overflow: hidden;
+}
+#img-preview { max-width: 100%; }
+#img-label {
+  float: left;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid crimson;
+  padding: 0 10px;
+  color: white;
+  font-size: 12px;
+  height: 37px;
+  line-height: 37px;
+}
+#maxMembers{
+  padding:7px;
+}
+#img { display: none; }
+#twit { width: 100%; min-height: 72px; }
+#twit-btn {
+  float: right;
+  color: white;
+  background: crimson;
+  border: none;
+}
+.twit {
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.twit-author { display: inline-block; font-weight: bold; margin-right: 10px; }
+.twit-follow {
+  padding: 1px 5px;
+  background: #fff;
+  border: 1px solid silver;
+  border-radius: 5px;
+  color: crimson;
+  font-size: 12px;
+  cursor: pointer;
+}
+.register{
+  clear: both; /* 이전 요소와 겹침 방지 */
+  text-align: left;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid silver;
+  background: #e8f7ff;
+  justify-content: right;
+}
+.half{
+  text-align: center;
+  float:left;
+  width: 30%;
+  padding:10px;
+  margin: 10px 2.5%;
+  background: #faf9f9;
+  border: 1px solid silver ;
+  border-radius: 6px;
+  box-sizing : border-box;
+}
+.form-actions {
+  display: flex; /* 플렉스 박스 사용 */
+  justify-content: center; /* 버튼을 오른쪽으로 정렬 */
+  margin-top: 10px; /* 위쪽 여백 */
+}
+
+#study-btn {
+  font-weight: bold;
+  font-size: large;
+  height: 40px; /* 버튼 높이 */
+  line-height: normal; /* 텍스트 수직 정렬 */
+  /*font-weight: */
+  color: white;
+  padding:10px 10px;
+  background: #7ea0fb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.twit-img { text-align: center; }
+.twit-img img { max-width: 75%; }
+.error-message { color: red; font-weight: bold; }
+#search-form { text-align: right; }
+#join-form { padding: 10px; text-align: center; }
+#hashtag-form { text-align: right; }
+footer { text-align: center; }
+
+.studies{
+  width: 90%;
+}
+.study{
+  width:auto;
+  padding: 10px;
+  background: #e8f7ff;
+  margin : 10px;
+  border-radius: 4px;
+  border: solid 1px #bcbcdc;
+}
+.studyDescription{
+  align-items: center;
+  justify-content: space-between;
+}
+.studyDescription1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+.studyDescription2{
+  display: flex;
+  justify-content: right;
+}
+.study-actions {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  justify-content: right;
+  flex: 1;
+}
+
+.study-author, .maxMember {
+  flex: 1;
+}

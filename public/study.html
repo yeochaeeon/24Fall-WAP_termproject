@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스터디 페이지</title>
+    <link rel="stylesheet" href="/study.css">
+</head>
+<body>
+<div class="study-page">
+    <div class="study-title">
+        <h1 id="study-title">스터디 제목 로딩 중...</h1>
+    </div>
+    <h3 id="study-creator">✏️스터디장: 로딩 중...✏️</h3>
+
+    <div class="tasks">
+        <h2 style="background: rgba(214,225,255,0.48); padding:5px; width: 25%; border-radius: 10px;">📘 과제 목록</h2>
+        <ul id="tasks-list">
+            <li>과제 로딩 중...</li>
+        </ul>
+        <form id="task-form">
+            <h3>과제 등록</h3>
+            <div class="detailForm">
+                <input type="text" name="title" id="task-title" placeholder="과제 제목" required>
+                <textarea name="description" id="task-description" placeholder="과제 설명" required></textarea>
+                <label for="task-dueDate"><strong>오른쪽 달력 아이콘을 눌러 마감일을 등록하세요</strong></label>
+                <input type="date" name="dueDate" id="task-dueDate" required>
+                <button type="submit">등록</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="notices">
+        <h2 style="background: rgba(214,225,255,0.48); padding:5px; width: 25%; border-radius: 10px;">📢 공지사항</h2>
+        <ul id="notices-list">
+            <li>공지 로딩 중...</li>
+        </ul>
+        <form id="notice-form">
+            <h3>공지 등록</h3>
+            <div class="detailForm">
+                <input type="text" name="title" id="notice-title" placeholder="공지 제목" required>
+                <textarea name="content" id="notice-content" placeholder="공지 내용" required></textarea>
+                <button type="submit">등록</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    // 스터디 데이터 가져오기
+    const studyId = window.location.pathname.split('/').pop();
+
+    async function fetchStudyData() {
+        try {
+            // rest api 데이터 요청
+            const studyResponse = await fetch(`/api/study/${studyId}`);
+            const tasksResponse = await fetch(`/api/study/${studyId}/tasks`);
+            const noticesResponse = await fetch(`/api/study/${studyId}/notices`);
+
+            if (!studyResponse.ok || !tasksResponse.ok || !noticesResponse.ok) {
+                throw new Error('데이터를 가져오는 중 오류 발생');
+            }
+
+            const { study } = await studyResponse.json();
+            const { tasks } = await tasksResponse.json();
+            const { notices } = await noticesResponse.json();
+            // 렌더링
+            renderStudy(study);
+            renderTasks(tasks);
+            renderNotices(notices);
+        } catch (error) {
+            console.error('데이터를 가져오는 중 오류 발생:', error);
+        }
+    }
+    // 과제 목록 렌더링
+    function renderTasks(tasks) {
+        const tasksList = document.getElementById('tasks-list');
+        tasksList.innerHTML = tasks.map(task => `
+        <li>
+            <strong>${task.title}</strong> [ 마감일: ${task.dueDate} ]
+            <p>${task.description}</p>
+        </li>
+    `).join('');
+    }
+
+    // 스터디 정보 렌더링
+    function renderStudy(study) {
+        document.getElementById('study-title').textContent = `${study.title} 스터디`;
+        document.getElementById('study-creator').textContent = `✏️스터디장: ${study.creatorNick}✏️`;
+    }
+
+    // 공지 목록 렌더링
+    function renderNotices(notices) {
+        const noticesList = document.getElementById('notices-list');
+        noticesList.innerHTML = notices.map(notice => `
+            <li>
+                <div class="notice">
+                    <strong>${notice.title}</strong>
+                    <span><strong>공지게시일</strong>: ${notice.createdAt}</span>
+                </div>
+                <p>${notice.content}</p>
+            </li>
+        `).join('');
+    }
+
+    // 과제 등록
+    document.getElementById('task-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const task = {
+            title: document.getElementById('task-title').value,
+            description: document.getElementById('task-description').value,
+            dueDate: document.getElementById('task-dueDate').value
+        };
+
+        try {
+            const response = await fetch(`/api/study/${studyId}/tasks`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(task)
+            });
+
+            if (response.ok) {
+                alert('과제가 등록되었습니다.');
+                fetchStudyData(); // 목록 갱신
+            } else {
+                alert('과제 등록에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('과제 등록 중 오류 발생:', error);
+        }
+    });
+
+    // 공지 등록
+    document.getElementById('notice-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const notice = {
+            title: document.getElementById('notice-title').value,
+            content: document.getElementById('notice-content').value
+        };
+
+        try {
+            const response = await fetch(`/api/study/${studyId}/notices`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(notice)
+            });
+
+            if (response.ok) {
+                alert('공지가 등록되었습니다.');
+                fetchStudyData(); // 목록 갱신
+            } else {
+                alert('공지 등록에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('공지 등록 중 오류 발생:', error);
+        }
+    });
+
+    // 초기 데이터 로드
+    fetchStudyData();
+</script>
+</body>
+</html>

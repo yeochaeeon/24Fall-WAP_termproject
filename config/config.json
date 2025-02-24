@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "root",
+    "password": "1212",
+    "database": "studymanager",
+    "host": "127.0.0.1"
+  },
+  "test": {
+    "username": "root",
+    "password": "1212",
+    "database": "studymanager",
+    "host": "127.0.0.1"
+  },
+  "production": {
+    "username": "root",
+    "password": "1212",
+    "database": "studymanager",
+    "host": "127.0.0.1"
+  }
+}

@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="timeline">
+  {% if user %}
+  <div class="studies">
+    <h2 style="text-align: center">📝개설된 스터디📝</h2>
+    {% if studylist and studylist.length > 0 %}
+    {% for study in studylist %}
+    <div class="study">
+      <div class="study-title" style="font-size: large; margin-bottom: 5px;"><strong>{{ study.title }} 스터디</strong></div>
+      <div class="studyDescription">
+        <div class="studyDescription1">
+          <div class="study-author"><strong>스터디장</strong> : {{ study.createdBy.nick }}</div>
+          <div class="currentMember"><strong>현재 인원</strong>: {{ study.currentMember }}명</div>
+          <div class="maxMember"><strong>최대 인원</strong> : {{ study.maxMember }}명</div>
+        </div>
+        <div class="studyDescription2">
+        <div class="study-actions" style="margin-top:10px;">
+          {% if study.isOwner %}
+          <p>⭐내가 개설한 스터디⭐</p>
+          <a href="/study/{{ study.id }}" class="btn">입장하기</a>
+          {% elif study.isMember %}
+          <a href="/study/{{ study.id }}" class="btn">입장하기</a>
+          {% else %}
+          <form action="/study/join" method="POST" style="display: inline;">
+            <input type="hidden" name="studyId" value="{{ study.id }}">
+            <button type="submit" class="btn" style="color:coral">가입하기</button>
+          </form>
+          {% endif %}
+        </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3 style="text-align: center">등록된 스터디가 아직 없습니다.</h3>
+    {% endif %}
+  </div>
+  {% else %}
+  <h2>로그인이 필요합니다!</h2>
+  {% endif %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+  // URL 쿼리 파라미터 읽기
+  const urlParams = new URLSearchParams(window.location.search);
+  const successMessage = urlParams.get('success');
+  const errorMsg = urlParams.get(('error'));
+  if (successMessage) {
+    alert(`${successMessage} 스터디 가입이 승인되었습니다`);
+    // 성공 메시지가 반복적으로 뜨지 않도록 URL에서 쿼리 파라미터 제거
+    history.replaceState(null, '', window.location.pathname);
+  }
+  if (errorMsg === 'maxMembers'){
+    alert('최대 인원을 초과했습니다. 더 이상 가입할 수 없습니다.');
+    // 쿼리의 에러파라미터 없애기
+    history.replaceState(null, '', window.location.pathname);
+  }
+  document.querySelector('#study-form')?.addEventListener('submit', function (event) {
+    const title = document.querySelector('#title').value.trim();
+    const maxMembers = document.querySelector('#maxMembers').value;
+
+    if (!title || !maxMembers) {
+      event.preventDefault();
+      alert('스터디 제목과 최대 인원을 입력해주세요.');
+    }
+  });
+</script>
+{% endblock %}
+
+
+
