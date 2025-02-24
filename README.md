@@ -60,7 +60,7 @@
 ## 🚀실행 방법
 1. 클론 및 의존성 설치
    ```
-   git clone https://github.com/yeochaeeon/24Fall-WAP_termproject
+   git clone https://github.com/yeochaeeon/24Fall-WAP_termproject.git
    cd 24Fall-WAP_termproject
    npm install
    ```
